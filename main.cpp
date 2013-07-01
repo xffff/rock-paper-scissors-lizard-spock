@@ -19,7 +19,7 @@ int main()
       <<"(3) RandomBot\n"
       <<"(4) IterativeBot\n"
       <<"(5) LastPlayBot\n"
-      <<"(6) MyBot\n\n"
+    //      <<"(6) MyBot\n\n"
       <<"Select player 1: ";
   cin>>ip1;
   p1 = choosePlayer(ip1);
@@ -30,7 +30,7 @@ int main()
 
   cout<<"\n\n"<<p1->name()<<" vs. "<<p2->name()<<". Go!\n";
 
-  game();
+  game(numrounds, *p1, *p2);
   
   return 0;
 }
@@ -43,8 +43,8 @@ Player* choosePlayer(int x)
   case 3: return new RandomBot("RandomBot");
   case 4: return new IterativeBot("IterativeBot");
   case 5: return new LastPlayBot("LastPlayBot");
-  case 6: return new MyBot("MyBot");
-  default return new Human("Human");
+    //  case 6: return new MyBot("MyBot");
+  default: return new Human("Human");
   }
 }
 
@@ -52,15 +52,45 @@ void game(int n, Player &p1, Player &p2)
 {
   Element *p1move;
   Element *p2move;
-  int tscore = 0;
+  int p1tscore = 0;
+  int p2tscore = 0;
+  
   for(int i=0; i<n; ++i) {
-    int rscore = 0;
+    int p1rscore = 0;
+    int p2rscore = 0;    
     cout<<"Round "<<i<<endl;
+    
     for(int j=0; j<n; ++j) {
-      *p1move = p1->play();
-      *p2move = p2->play();
-      cout<<p1move->compareTo(*p2move)<<endl;
-      // here I need to grab the win/lose crap
+      size_t result;
+      string move;
+      p1move = p1.play();
+      p2move = p2.play();
+      move = p1move->compareTo(*p2move);
+      
+      result = move.find("Tie");      
+      if(result==string::npos) {	
+	result = move.find("Win");
+	if(result!=string::npos) { p1rscore++; }
+	else { p2rscore++; }
+      }
+      cout<<endl<<move<<endl;
+    }
+    if(p1rscore==p2rscore) {
+      cout<<"Tie!"<<endl;
+    } else if(p1rscore>p2rscore) {
+      cout<<"P1 wins round "<<i<<endl<<endl;
+      p1tscore++;
+    } else {
+      cout<<"P2 wins round "<<i<<endl<<endl;
+      p2tscore++;
+    }
+  }
+  if(p1tscore==p2tscore) {
+    cout<<"Tie!\n";
+    if(p1tscore>p2tscore) {
+      cout<<"P1 wins!\n";
+    } else {
+      cout<<"P2 wins!\n";
     }
   }
 }
