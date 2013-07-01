@@ -32,13 +32,7 @@ class RandomBot : public Player {
  public:
   RandomBot(string name)
     : Player(name) {}
-  Element *play()
-  {
-    srand(time(NULL));
-    int i = rand() % 5;
-    cout<<name()<<" chose "<<m->m[i]->name()<<endl;
-    return m->m[i];
-  }
+  Element *play();
 };
 
 class IterativeBot : public Player {

@@ -1,3 +1,5 @@
+#include "element.h"
+
 Element::Element(string lname) : _name(lname)
 {
   string ltypes[] = {"Rock", "Paper", "Scissors", "Lizard", "Spock"};

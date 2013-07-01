@@ -63,8 +63,15 @@ void game(int n, Player &p1, Player &p2)
     for(int j=0; j<n; ++j) {
       size_t result;
       string move;
-      p1move = p1.play();
-      p2move = p2.play();
+
+      if(p1.name() == "LastPlayBot" && j>0) { p1move = p2move; }
+      else { p1move = p1.play(); }
+      if(p2.name() == "LastPlayBot" && j>0) { p2move = p1move; }
+      else { p2move = p2.play(); }
+
+      // p1move = p1.play();
+      // p2move = p2.play();
+      
       move = p1move->compareTo(*p2move);
       
       result = move.find("Tie");      
@@ -94,3 +101,4 @@ void game(int n, Player &p1, Player &p2)
     }
   }
 }
+

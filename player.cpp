@@ -1,3 +1,13 @@
+#include "player.h"
+
+Element* RandomBot::play()  
+{
+  srand(time(NULL));
+  int i = rand() % 5;
+  cout<<name()<<" chose "<<m->m[i]->name()<<endl;
+  return m->m[i];
+}
+
 Element* Human::play()
 {
   int move;
@@ -15,3 +25,4 @@ Element* Human::play()
     play();
   }  
 }
+
