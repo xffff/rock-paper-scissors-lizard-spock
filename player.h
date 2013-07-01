@@ -32,7 +32,7 @@ class RandomBot : public Player {
  public:
   RandomBot(string name)
     : Player(name) {}
-  Element *play();
+  Element* play();
 };
 
 class IterativeBot : public Player {
@@ -40,7 +40,7 @@ class IterativeBot : public Player {
   IterativeBot(string name)
     : Player(name) 
   { count = 0; }
-  Element* play() { return m->m[++count % 5]; }
+  Element* play();
  private:
   int count;
 };
@@ -48,10 +48,8 @@ class IterativeBot : public Player {
 class LastPlayBot : public Player {
  public:
   LastPlayBot(string name)
-    : Player(name) 
-  { lastMove = rand() % 5; }
-  Element* play() { return m->m[lastMove]; }
-  int lastMove;
+    : Player(name) {}  
+  Element* play() { return m->m[rand() % 5]; }
 };
 
 class Human : public Player {

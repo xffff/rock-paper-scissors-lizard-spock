@@ -58,7 +58,9 @@ void game(int n, Player &p1, Player &p2)
   for(int i=0; i<n; ++i) {
     int p1rscore = 0;
     int p2rscore = 0;    
-    cout<<"Round "<<i<<endl;
+    cout<<"-------"<<endl
+	<<"Round "<<i<<endl
+	<<"-------"<<endl;
     
     for(int j=0; j<n; ++j) {
       size_t result;
@@ -80,25 +82,25 @@ void game(int n, Player &p1, Player &p2)
 	if(result!=string::npos) { p1rscore++; }
 	else { p2rscore++; }
       }
-      cout<<endl<<move<<endl;
+      cout<<move<<"\n\n";
     }
     if(p1rscore==p2rscore) {
       cout<<"Tie!"<<endl;
     } else if(p1rscore>p2rscore) {
-      cout<<"P1 wins round "<<i<<endl<<endl;
       p1tscore++;
+      cout<<"P1 wins round "<<i<<", score: "<<p1tscore<<endl;
     } else {
-      cout<<"P2 wins round "<<i<<endl<<endl;
       p2tscore++;
+      cout<<"P2 wins round "<<i<<", score: "<<p2tscore<<endl;
     }
   }
+  
   if(p1tscore==p2tscore) {
     cout<<"Tie!\n";
-    if(p1tscore>p2tscore) {
-      cout<<"P1 wins!\n";
-    } else {
-      cout<<"P2 wins!\n";
-    }
+  } else if(p1tscore>p2tscore) {
+    cout<<"P1 wins!\n";
+  } else {
+    cout<<"P2 wins!\n";
   }
 }
 
